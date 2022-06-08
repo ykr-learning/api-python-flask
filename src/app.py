@@ -1,5 +1,5 @@
-import json
 from flask import Flask, jsonify, render_template, request
+
 
 def create_app():
     app = Flask(__name__)
@@ -20,7 +20,7 @@ def create_app():
     def home():
         return render_template('index.html'), 200
 
-    @app.route('/store/', methods = ['POST'])
+    @app.route('/store/', methods=['POST'])
     def create_store():
         request_data = request.get_json()
         new_store = {
@@ -41,7 +41,7 @@ def create_app():
     def get_stores():
         return jsonify({'stores': stores}), 200
 
-    @app.route('/store/<string:name>/item', methods = ['POST'])
+    @app.route('/store/<string:name>/item', methods=['POST'])
     def create_item_in_store(name):
         request_data = request.get_json()
         for store in stores:
@@ -62,6 +62,7 @@ def create_app():
         return jsonify({'message': 'store not found'}), 404
 
     return app
+
 
 def start_app():
     myapp = create_app()
