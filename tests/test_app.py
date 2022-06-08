@@ -1,5 +1,4 @@
 from flask import request, jsonify
-from numpy import equal
 
 from src.app import create_app
 import pytest
