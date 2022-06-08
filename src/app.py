@@ -54,7 +54,6 @@ def create_app():
                 return jsonify(new_item)
         return jsonify({'message': 'store not found'})
 
-
     @app.route('/store/<string:name>/item')
     def get_items_in_store(name):
         for store in stores:
@@ -62,9 +61,8 @@ def create_app():
                 return jsonify({'items': store['items']})
         return jsonify({'message': 'store not found'})
 
-
-    app.run(port=5000)
-
     return app
 
-create_app()
+def start_app():
+    myapp = create_app()
+    myapp.run(port=5000)

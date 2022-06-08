@@ -22,10 +22,6 @@ def client(app):
     return app.test_client()
 
 
-@pytest.fixture()
-def runner(app):
-    return app.test_cli_runner()
-
 def test_request_home(client):
     response = client.get("/")
     assert b"Hello, world index.html !" in response.data
