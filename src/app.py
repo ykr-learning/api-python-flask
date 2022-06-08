@@ -18,7 +18,7 @@ def create_app():
 
     @app.route('/')
     def home():
-        return render_template('index.html')
+        return render_template('index.html'), 200
 
     @app.route('/store/', methods = ['POST'])
     def create_store():
@@ -28,18 +28,18 @@ def create_app():
             'items': []
         }
         stores.append(new_store)
-        return jsonify(new_store)
+        return jsonify(new_store), 201
 
     @app.route('/store/<string:name>')
     def get_store(name):
         for store in stores:
             if store['name'] == name:
-                return jsonify(store)
-        return jsonify({'message': 'store not found'})
+                return jsonify(store), 200
+        return jsonify({'message': 'store not found'}), 404
 
     @app.route('/store')
     def get_stores():
-        return jsonify({'stores': stores})
+        return jsonify({'stores': stores}), 200
 
     @app.route('/store/<string:name>/item', methods = ['POST'])
     def create_item_in_store(name):
@@ -51,15 +51,15 @@ def create_app():
                     'price': request_data['price']
                 }
                 store['items'].append(new_item)
-                return jsonify(new_item)
-        return jsonify({'message': 'store not found'})
+                return jsonify(new_item), 201
+        return jsonify({'message': 'store not found'}), 404
 
     @app.route('/store/<string:name>/item')
     def get_items_in_store(name):
         for store in stores:
             if store['name'] == name:
-                return jsonify({'items': store['items']})
-        return jsonify({'message': 'store not found'})
+                return jsonify({'items': store['items']}), 200
+        return jsonify({'message': 'store not found'}), 404
 
     return app
 
