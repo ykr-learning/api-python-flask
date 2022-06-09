@@ -6,7 +6,7 @@ def create_app():
 
     stores = [
         {
-            'name': 'My wonderful store',
+            'name': 'My_wonderful_store',
             'items': [
                 {
                     'name': 'My Item',
@@ -18,6 +18,7 @@ def create_app():
 
     @app.route('/')
     def home():
+        # render_template search the file in the folder templates
         return render_template('index.html'), 200
 
     @app.route('/store/', methods=['POST'])

@@ -29,7 +29,7 @@ def test_request_home(client):
 
 def test_request_store(client):
     response = client.get("/store")
-    assert b"My wonderful store" in response.data
+    assert b"My_wonderful_store" in response.data
     assert response.status_code == 200
 
 
@@ -40,8 +40,8 @@ def test_request_store_not_exists(client):
 
 
 def test_request_store_exists(client):
-    response = client.get("/store/My wonderful store")
-    assert b"My wonderful store" in response.data
+    response = client.get("/store/My_wonderful_store")
+    assert b"My_wonderful_store" in response.data
     assert response.status_code == 200
 
 
