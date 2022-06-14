@@ -67,4 +67,4 @@ def create_app():
 
 def start_app():
     myapp = create_app()
-    myapp.run(port=5000)
+    myapp.run(port=8000)
