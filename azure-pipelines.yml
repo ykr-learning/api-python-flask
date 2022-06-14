@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- master
+- *
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
@@ -46,6 +46,12 @@ stages:
         pip install -r requirements.txt
       workingDirectory: $(projectRoot)
       displayName: "Install requirements"
+
+    - script: |
+        pip install pytest
+        pip install pytest-cov
+        python -m pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
+      displayName: 'Test with pytest'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
